@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Билеты — Almaty Ballet</title>
+  <link rel="stylesheet" href="{% static '/css/style.css' %}">
+</head>
+<body>
+
+  <!-- Навбар -->
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <img src="{% static 'images/ChatGPT Image Jul 21, 2025, 05_51_35 PM.png' %}" alt="Almaty Ballet Logo">
+    </div>
+    <ul class="navbar-menu">
+      <li><a href="{% url 'tickets' %}">Билеты</a></li>
+      <li><a href="{% url 'about' %}">О Нас</a></li>
+      <li><a href="{% url 'support' %}">Поддержать</a></li>
+    </ul>
+  </nav>
+
+  <section class="tickets-hero">
+      <div class="tickets-hero-overlay">
+        <h1 class="tickets-title">Актуальные события</h1>
+      </div>
+  </section>
+
+
+  <section class="tickets-section">
+      <div class="tickets-container">
+        {% for event in events %}
+          <div class="event-horizontal-card">
+            {% if event.image %}
+              <div class="event-horizontal-image">
+                <img src="{{ event.image.url }}" alt="{{ event.name }}">
+              </div>
+            {% endif %}
+            <div class="event-horizontal-info">
+              <h2>{{ event.name }}</h2>
+              <p class="event-date"><strong>Дата:</strong> {{ event.date }}</p>
+              <p class="event-description">{{ event.description }}</p>
+              <p class="event-price"><strong>Стоимость:</strong> {{ event.price }} ₸</p>
+              <div class="event-buttons">
+                  <a href="#" class="btn book-btn">Купить билет</a>
+                  <a href="{% url 'event_detail' id=event.id %}" class="btn more-btn">Еще</a>
+              </div>
+
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+  </section>
+
+  <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-logo">
+          <img src="{% static 'images/ChatGPT Image Jul 21, 2025, 05_51_35 PM.png' %}" alt="Almaty Ballet Logo">
+          <p>&copy; 2025 Almaty Ballet. Все права защищены.</p>
+        </div>
+
+        <div class="footer-nav">
+          <h4>Навигация</h4>
+          <ul>
+            <li><a href="{% url 'home' %}">Главная</a></li>
+            <li><a href="{% url 'about' %}">О нас</a></li>
+            <li><a href="{% url 'tickets' %}">Репертуар</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Контакты</h4>
+          <p>г. Алматы, ул. Абая, 25</p>
+          <p>+7 (727) 123-45-67</p>
+          <p>info@almatyballet.kz</p>
+        </div>
+      </div>
+  </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Almaty Ballet</title>
+  <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap&subset=cyrillic" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Навбар -->
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <img src="{% static 'images/ChatGPT Image Jul 21, 2025, 05_51_35 PM.png' %}" alt="Almaty Ballet Logo">
+    </div>
+    <ul class="navbar-menu">
+      <li><a href="{% url 'tickets' %}">Билеты</a></li>
+      <li><a href="{% url 'about' %}">О Нас</a></li>
+      <li><a href="{% url 'support' %}">Поддержать</a></li>
+    </ul>
+  </nav>
+
+  <!-- Карусель -->
+  <div class="carousel">
+      {% for slide in slides %}
+        <div class="carousel-slide {% if forloop.first %}active{% endif %}" style="background-image: url('{{ slide.image.url }}');">
+          <div class="carousel-content">
+            <h1>{{ slide.title }}</h1>
+            <p>{{ slide.subtitle }}</p>
+            <a href="#" class="btn">{{ slide.button_text }}</a>
+          </div>
+        </div>
+      {% endfor %}
+
+      <!-- Стрелки -->
+      <button class="carousel-prev">&#10094;</button>
+      <button class="carousel-next">&#10095;</button>
+  </div>
+
+
+  <!-- Описание -->
+    <section class="about-section">
+      <div class="about-container">
+        <h2>О театре</h2>
+        <p>
+          Алматинский балет — это воплощение грации, мастерства и страсти к сцене.
+          Мы объединяем классические традиции с современными формами искусства,
+          создавая неповторимые постановки, которые вдохновляют и трогают сердца зрителей.
+        </p>
+      </div>
+    </section>
+
+  <!-- Карточки -->
+    <section class="cards-section">
+      <div class="cards-container">
+        {% for event in events %}
+            <div class="card">
+                <img src="{{ event.image.url }}" alt="{{ event.name }}">
+                <h3>{{ event.name }}</h3>
+                <p><strong>Дата:</strong> {{ event.date }}</p>
+                <p>{{ event.description }}</p>
+                <a href="{% url 'event_detail' id=event.id %}" class="card-btn">Подробнее</a>
+            </div>
+        {% endfor %}
+      </div>
+    </section>
+
+  <!-- Секция с заголовком и карточками-ссылками -->
+    <section class="grid-section">
+      <div class="grid-header">
+        <h2>Изучить подробнее</h2>
+        <a href="{% url 'about' %}">Смотреть все →</a>
+      </div>
+
+      <div class="grid-container">
+        {% for item in backstages %}
+            <a href="{% url 'backstage_detail' id=item.id %}" class="grid-card">
+              <img src="{{ item.image.url }}" alt="{{ item.title }}">
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.subtitle }}</p>
+            </a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Блок подписки -->
+    <section class="subscribe-centered">
+      <div class="subscribe-centered-bg"></div>
+      <div class="subscribe-centered-content">
+        <h2>Подпишитесь на рассылку</h2>
+        <p>Узнавайте первыми о премьерах, событиях и закулисье Алматинского балета.</p>
+        <form class="subscribe-form">
+          <input type="text" placeholder="Ваше имя" required>
+          <input type="email" placeholder="Email адрес" required>
+          <button type="submit">Подписаться</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-logo">
+          <img src="{% static 'images/ChatGPT Image Jul 21, 2025, 05_51_35 PM.png' %}" alt="Almaty Ballet Logo">
+          <p>&copy; 2025 Almaty Ballet. Все права защищены.</p>
+        </div>
+
+        <div class="footer-nav">
+          <h4>Навигация</h4>
+          <ul>
+            <li><a href="{% url 'home' %}">Главная</a></li>
+            <li><a href="{% url 'about' %}">О нас</a></li>
+            <li><a href="{% url 'tickets' %}">Репертуар</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Контакты</h4>
+          <p>г. Алматы, ул. Абая, 25</p>
+          <p>+7 (727) 123-45-67</p>
+          <p>info@almatyballet.kz</p>
+        </div>
+      </div>
+    </footer>
+
+
+  <script src="{% static '/js/script.js' %}"></script>
+</body>
+</html>

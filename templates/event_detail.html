@@ -1,0 +1,118 @@
+{% load static %}
+{% load duration_extras %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ item.title }} — Almaty Ballet</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+  <!-- Навбар -->
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <img src="{% static 'images/ChatGPT Image Jul 21, 2025, 05_51_35 PM.png' %}" alt="Almaty Ballet Logo">
+    </div>
+    <ul class="navbar-menu">
+      <li><a href="{% url 'tickets' %}">Билеты</a></li>
+      <li><a href="{% url 'about' %}">О Нас</a></li>
+      <li><a href="{% url 'support' %}">Поддержать</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+    <section class="hero" style="background-image: url('{{ item.image.url }}');">
+      <div class="hero-overlay">
+        <div class="container">
+          <h1 class="hero-title">{{ item.name }}</h1>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="event-main container">
+      <div class="event-columns">
+        <!-- Левая колонка -->
+        <div class="event-description">
+          <div class="event-text">
+            {{ item.description|safe }}
+          </div>
+          <a href="#" class="buy-button">Купить билет</a>
+        </div>
+
+        <!-- Правая колонка -->
+        <div class="event-info">
+          <ul>
+            <li><strong>Дата:</strong> {{ item.date|date:"d E Y" }}</li>
+            <li><strong>Время начала:</strong> {{ item.start_time }}</li>
+            <li><strong>Продолжительность:</strong> {{ item.duration|format_duration }}</li>
+            <li><strong>Возрастное ограничение:</strong> {{ item.age_limit }}+</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Творческая команда -->
+    {% if item.creative_roles.all %}
+    <section class="creatives-section container">
+      <h2>Творческая команда</h2>
+      <div class="creatives-grid">
+        {% for role in item.creative_roles.all %}
+          <div class="creative-card">
+            {% if role.creative.image %}
+              <img src="{{ role.creative.image.url }}" alt="{{ role.creative.full_name }}">
+            {% endif %}
+            <h3>{{ role.creative.full_name }}</h3>
+            <p><em>{{ role.get_role_display }}</em></p>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- Артисты -->
+    {% if item.cast_roles.all %}
+    <section class="artists-section container">
+      <h2>Артисты</h2>
+      <div class="artists-grid">
+        {% for role in item.cast_roles.all %}
+          <div class="artist-card">
+            {% if role.cast.photo %}
+              <img src="{{ role.cast.photo.url }}" alt="{{ role.cast.full_name }}">
+            {% endif %}
+            <h3>{{ role.cast.full_name }}</h3>
+            <p>{{ role.role }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-logo">
+          <img src="{% static 'images/ChatGPT Image Jul 21, 2025, 05_51_35 PM.png' %}" alt="Almaty Ballet Logo">
+          <p>&copy; 2025 Almaty Ballet. Все права защищены.</p>
+        </div>
+
+        <div class="footer-nav">
+          <h4>Навигация</h4>
+          <ul>
+            <li><a href="{% url 'home' %}">Главная</a></li>
+            <li><a href="{% url 'about' %}">О нас</a></li>
+            <li><a href="{% url 'tickets' %}">Репертуар</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Контакты</h4>
+          <p>г. Алматы, ул. Абая, 25</p>
+          <p>+7 (727) 123-45-67</p>
+          <p>info@almatyballet.kz</p>
+        </div>
+      </div>
+  </footer>
+
+</body>
+</html>
