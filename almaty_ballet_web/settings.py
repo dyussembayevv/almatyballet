@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from PIL import Image
+Image.MAX_IMAGE_PIXELS = 200000000
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
