@@ -140,15 +140,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Настройка media для Cloudinary
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-# Данные из Cloudinary dashboard
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dgxcawpqs',
-    'API_KEY': '215995121796113',
-    'API_SECRET': 'j8ijO42QIxI2sGV1y_Vou_3tJ1s'
-}
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 JAZZMIN_SETTINGS = {
     "site_title": "Almaty Ballet Admin",

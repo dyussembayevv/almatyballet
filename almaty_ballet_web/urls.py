@@ -30,4 +30,3 @@ urlpatterns = [
     path('support/', views.support, name='support'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
