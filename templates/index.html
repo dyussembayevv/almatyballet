@@ -12,7 +12,9 @@
   <!-- Навбар -->
   <nav class="navbar">
     <div class="navbar-logo">
-      <img src="{% static 'images/ChatGPT Image Jul 21, 2025, 05_51_35 PM.png' %}" alt="Almaty Ballet Logo">
+      <a href="{% url 'home' %}">
+          <img src="{% static 'images/ChatGPT Image Jul 21, 2025, 05_51_35 PM.png' %}" alt="Almaty Ballet Logo">
+      </a>
     </div>
     <ul class="navbar-menu">
       <li><a href="{% url 'tickets' %}">Билеты</a></li>

@@ -35,3 +35,7 @@ def event_detail(request, id):
 
 def support(request):
     return render(request, 'support.html')
+
+from django.conf import settings
+print(settings.MEDIA_ROOT)
+print(settings.MEDIA_URL)
